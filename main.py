@@ -98,7 +98,7 @@ if __name__ == "__main__":
     path.reverse()
 
 
-    visualize(path, method='A* using manhatten')
+    visualize(path, method='A* using Manhatten')
     puzzle = Puzzle(path)
     puzzle.initialization()
 

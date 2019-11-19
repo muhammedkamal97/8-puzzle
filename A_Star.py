@@ -33,7 +33,7 @@ def a_star_search(initial_state, goal_test, successor, get_distance):
 
         for ch in children:
             ch = State(list(ch), state)
-            ch.set_g_value(initial_state.g_value + 1)
+            ch.set_g_value(state.g_value + 1)
             ch.set_h_value(get_distance)
             if ch not in explored:
                 heapq.heappush(heap, ch)
