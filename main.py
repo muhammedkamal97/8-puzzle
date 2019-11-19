@@ -1,4 +1,6 @@
 from state import State
+from visualizer import visualize
+from game.puzzle import Puzzle
 from BFS import breadth_first_search
 from DFS import depth_first_search
 
@@ -50,7 +52,10 @@ if __name__ == "__main__":
         path.append(state.state)
 
     path.reverse()
-    print(path)
+    visualize(path, method='BFS')
+
+    puzzle = Puzzle(path)
+    puzzle.initialization()
 
     # DFS
     result, state = depth_first_search(init_state, goal_test, successor)
@@ -62,6 +67,8 @@ if __name__ == "__main__":
         path.append(state.state)
 
     path.reverse()
-    print(path)
+    visualize(path, method='DFS')
 
+    puzzle = Puzzle(path)
+    puzzle.initialization()
     # A*
