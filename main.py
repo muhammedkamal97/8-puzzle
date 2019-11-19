@@ -96,7 +96,11 @@ if __name__ == "__main__":
         path.append(state.state)
 
     path.reverse()
-    print(path)
+
+
+    visualize(path, method='A* using Manhatten')
+    puzzle = Puzzle(path)
+    puzzle.initialization()
 
 
     # A* eucildean
@@ -109,4 +113,8 @@ if __name__ == "__main__":
         path.append(state.state)
 
     path.reverse()
-    print(path)
+    visualize(path, method='A* using euclidean')
+    puzzle = Puzzle(path)
+    puzzle.initialization()
+
+
