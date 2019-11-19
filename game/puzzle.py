@@ -8,7 +8,7 @@ from game.text import Text
 
 
 class Puzzle:
-    def __init__(self, path):
+    def __init__(self, path, method):
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
 
@@ -18,7 +18,8 @@ class Puzzle:
         pygame.font.init()
 
         self.screen = pygame.display.set_mode((600, 600))
-        pygame.display.set_caption('### 8-Puzzle ###')
+        header = "Puzzle using: "+method
+        pygame.display.set_caption(header)
         self.screen.fill(self.black)
 
         self.puzzle_drawer = PuzzleDrawer(self.screen)

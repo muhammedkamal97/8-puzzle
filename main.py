@@ -65,7 +65,7 @@ if __name__ == "__main__":
     path.reverse()
     visualize(path, method='BFS')
 
-    puzzle = Puzzle(path)
+    puzzle = Puzzle(path, "BFS")
     puzzle.initialization()
 
     # DFS
@@ -80,9 +80,7 @@ if __name__ == "__main__":
     path.reverse()
     visualize(path, method='DFS')
 
-
-
-    puzzle = Puzzle(path)
+    puzzle = Puzzle(path, "DFS")
     puzzle.initialization()
 
 
@@ -97,9 +95,8 @@ if __name__ == "__main__":
 
     path.reverse()
 
-
     visualize(path, method='A* using Manhatten')
-    puzzle = Puzzle(path)
+    puzzle = Puzzle(path, "A* using Manhatten")
     puzzle.initialization()
 
 
@@ -114,7 +111,7 @@ if __name__ == "__main__":
 
     path.reverse()
     visualize(path, method='A* using euclidean')
-    puzzle = Puzzle(path)
+    puzzle = Puzzle(path, "A* using euclidean")
     puzzle.initialization()
 
 
