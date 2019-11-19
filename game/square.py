@@ -11,7 +11,10 @@ class Square:
         self.myfont = pygame.font.SysFont('Comic Sans MS', 30)
         self.digit = digit
         self.sqr_side = 98
-        self.rect = pygame.draw.rect(self.screen, self.green, (sqr_x, sqr_y, self.sqr_side, self.sqr_side))
+        if self.digit != 0:
+            self.rect = pygame.draw.rect(self.screen, self.green, (sqr_x, sqr_y, self.sqr_side, self.sqr_side))
+        else:
+            self.rect = pygame.draw.rect(self.screen, (255, 255, 255), (sqr_x, sqr_y, self.sqr_side, self.sqr_side))
         if self.digit != 9:
             self.text_to_screen(self.digit, self.rect.x + 40, self.rect.y + 25)
 
