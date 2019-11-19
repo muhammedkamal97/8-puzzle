@@ -2,7 +2,7 @@ import queue
 from state import State
 
 
-def breadth_first_search(initial_state, goal_test, successor):
+def depth_first_search(initial_state, goal_test, successor):
     """
     Parameters:
     initial_state (State): initial state
@@ -12,7 +12,7 @@ def breadth_first_search(initial_state, goal_test, successor):
     result (boolean): indicate the goal found or not
     goal (State): state of goal
     """
-    que = queue.Queue()
+    que = queue.LifoQueue()
     que.put(initial_state)
     explored = set()
     while not que.empty():
