@@ -20,14 +20,16 @@ def a_star_search(initial_state, goal_test, successor, get_distance):
     heap = []
     heapq.heappush(heap, initial_state)
     explored = set()
+    max_depth = 0
     while heap:
         state = heapq.heappop(heap)
         if state in explored:
             continue
 
         explored.add(state)
+        max_depth = max(max_depth, state.depth)
         if goal_test(state.state):
-            return True, state
+            return True, state, max_depth
 
         children = successor(state.state)
 
@@ -38,4 +40,4 @@ def a_star_search(initial_state, goal_test, successor, get_distance):
             if ch not in explored:
                 heapq.heappush(heap, ch)
 
-    return False, None
+    return False, None, max_depth

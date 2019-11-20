@@ -1,4 +1,5 @@
 from math import sqrt
+import time
 
 from state import State
 from visualizer import visualize
@@ -6,6 +7,7 @@ from game.puzzle import Puzzle
 from BFS import breadth_first_search
 from DFS import depth_first_search
 from A_Star import a_star_search
+
 
 def successor(state):
     new_states = []
@@ -32,6 +34,7 @@ def successor(state):
         new_states.append(tuple(lst))
     return new_states
 
+
 def goal_test(state):
     for i in range(len(state)):
         if i != state[i]:
@@ -39,10 +42,9 @@ def goal_test(state):
     return True
 
 
-
-
 def euclidean_distance(x1, y1, x2, y2):
     return sqrt(pow((x1-x2), 2) + pow((y1-y2), 2))
+
 
 def manhatten_distance(x1, y1, x2, y2):
     return abs(x1-x2) + abs(y1-y2)
@@ -54,7 +56,9 @@ if __name__ == "__main__":
     init_state = State(initial_state)
 
     # BFS
-    result, state = breadth_first_search(init_state, goal_test, successor)
+    BFS_time = time.time()
+    result, state, BFS_max_depth = breadth_first_search(init_state, goal_test, successor)
+    BFS_time = time.time() - BFS_time
     print(result)
     path = list()
     path.append(state.state)
@@ -69,7 +73,9 @@ if __name__ == "__main__":
     puzzle.initialization()
 
     # DFS
-    result, state = depth_first_search(init_state, goal_test, successor)
+    DFS_time = time.time()
+    result, state, DFS_max_depth = depth_first_search(init_state, goal_test, successor)
+    DFS_time = time.time() - DFS_time
     print(result)
     path = list()
     path.append(state.state)
@@ -85,7 +91,9 @@ if __name__ == "__main__":
 
 
     # A* manhatten
-    result, state = a_star_search(init_state, goal_test, successor, manhatten_distance)
+    A_start_1_time = time.time()
+    result, state, A_star_1_max_depth = a_star_search(init_state, goal_test, successor, manhatten_distance)
+    A_start_1_time = time.time() - A_start_1_time
     print(result)
     path = list()
     path.append(state.state)
@@ -101,7 +109,9 @@ if __name__ == "__main__":
 
 
     # A* eucildean
-    result, state = a_star_search(init_state, goal_test, successor, euclidean_distance)
+    A_start_2_time = time.time()
+    result, state, A_star_2_max_depth = a_star_search(init_state, goal_test, successor, euclidean_distance)
+    A_start_2_time = time.time() - A_start_2_time
     print(result)
     path = list()
     path.append(state.state)
@@ -114,4 +124,8 @@ if __name__ == "__main__":
     puzzle = Puzzle(path, "A* using euclidean")
     puzzle.initialization()
 
+    print("BFS time: ", BFS_time, " BFS max depth: ", BFS_max_depth)
+    print("DFS time: ", DFS_time, " DFS max depth: ", DFS_max_depth)
+    print("A*(manhatten distance) time: ", A_start_1_time, " A*(manhatten distance) max depth: ", A_star_1_max_depth)
+    print("A*(euclidean distance) time: ", A_start_2_time, " A*(manhatten distance) max depth: ", A_star_2_max_depth)
 

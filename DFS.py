@@ -15,6 +15,7 @@ def depth_first_search(initial_state, goal_test, successor):
     que = queue.LifoQueue()
     que.put(initial_state)
     explored = set()
+    max_depth = 0
     while not que.empty():
         state = que.get()
         if state in explored:
@@ -22,12 +23,14 @@ def depth_first_search(initial_state, goal_test, successor):
 
         explored.add(state)
 
+        max_depth = max(max_depth, state.depth)
+
         if goal_test(state.state):
-            return True, state
+            return True, state, max_depth
 
         childs = successor(state.state)
         for ch in childs:
             if ch not in explored:
                 que.put(State(list(ch), state))
 
-    return False, None
+    return False, None, max_depth

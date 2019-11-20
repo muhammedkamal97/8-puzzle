@@ -2,6 +2,10 @@ class State:
     def __init__(self, lists, parent=None, g_value=0, h_value=0):
         self._state = tuple(lists)
         self._parent = parent
+        if parent is None:
+            self._depth = 0
+        else:
+            self._depth = parent.depth + 1
         self._f_value = h_value + g_value
         self._g_value = g_value
         self._h_value = h_value
@@ -30,6 +34,10 @@ class State:
     @property
     def parent(self):
         return self._parent
+
+    @property
+    def depth(self):
+        return self._depth
 
     @property
     def f_value(self):
