@@ -89,8 +89,7 @@ if __name__ == "__main__":
     puzzle = Puzzle(path, "DFS")
     puzzle.initialization()
 
-
-    # A* manhatten
+    # A* manhattan
     A_start_1_time = time.time()
     result, state, A_star_1_max_depth = a_star_search(init_state, goal_test, successor, manhatten_distance)
     A_start_1_time = time.time() - A_start_1_time
@@ -103,12 +102,11 @@ if __name__ == "__main__":
 
     path.reverse()
 
-    visualize(path, method='A* using Manhatten')
-    puzzle = Puzzle(path, "A* using Manhatten")
+    visualize(path, method='A* using Manhattan')
+    puzzle = Puzzle(path, "A* using Manhattan")
     puzzle.initialization()
 
-
-    # A* eucildean
+    # A* euclidean
     A_start_2_time = time.time()
     result, state, A_star_2_max_depth = a_star_search(init_state, goal_test, successor, euclidean_distance)
     A_start_2_time = time.time() - A_start_2_time
@@ -126,6 +124,6 @@ if __name__ == "__main__":
 
     print("BFS time: ", BFS_time, " BFS max depth: ", BFS_max_depth)
     print("DFS time: ", DFS_time, " DFS max depth: ", DFS_max_depth)
-    print("A*(manhatten distance) time: ", A_start_1_time, " A*(manhatten distance) max depth: ", A_star_1_max_depth)
-    print("A*(euclidean distance) time: ", A_start_2_time, " A*(manhatten distance) max depth: ", A_star_2_max_depth)
+    print("A*(manhattan distance) time: ", A_start_1_time, " A*(manhattan distance) max depth: ", A_star_1_max_depth)
+    print("A*(euclidean distance) time: ", A_start_2_time, " A*(manhattan distance) max depth: ", A_star_2_max_depth)
 
