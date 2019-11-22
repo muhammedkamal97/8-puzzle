@@ -26,11 +26,11 @@ def depth_first_search(initial_state, goal_test, successor):
         max_depth = max(max_depth, state.depth)
 
         if goal_test(state.state):
-            return True, state, max_depth
+            return True, state, max_depth, len(explored)
 
         childs = successor(state.state)
         for ch in childs:
             if ch not in explored:
                 que.put(State(list(ch), state))
 
-    return False, None, max_depth
+    return False, None, max_depth, len(explored)

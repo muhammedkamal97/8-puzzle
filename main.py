@@ -57,73 +57,86 @@ if __name__ == "__main__":
 
     # BFS
     BFS_time = time.time()
-    result, state, BFS_max_depth = breadth_first_search(init_state, goal_test, successor)
+    result, state, BFS_max_depth, BFS_explored_states = breadth_first_search(init_state, goal_test, successor)
     BFS_time = time.time() - BFS_time
-    print(result)
-    path = list()
-    path.append(state.state)
-    while state.parent is not None:
-        state = state.parent
+    if result:
+        path = list()
         path.append(state.state)
+        while state.parent is not None:
+            state = state.parent
+            path.append(state.state)
 
-    path.reverse()
-    visualize(path, method='BFS')
+        path.reverse()
+        visualize(path, method='BFS')
 
-    puzzle = Puzzle(path, "BFS")
-    puzzle.initialization()
-
+        puzzle = Puzzle(path, "BFS")
+        puzzle.initialization()
+    else:
+        print("BFS Didn't find a solution")
     # DFS
     DFS_time = time.time()
-    result, state, DFS_max_depth = depth_first_search(init_state, goal_test, successor)
+    result, state, DFS_max_depth, DFS_explored_states = depth_first_search(init_state, goal_test, successor)
     DFS_time = time.time() - DFS_time
-    print(result)
-    path = list()
-    path.append(state.state)
-    while state.parent is not None:
-        state = state.parent
+    if result:
+        path = list()
         path.append(state.state)
+        while state.parent is not None:
+            state = state.parent
+            path.append(state.state)
 
-    path.reverse()
-    visualize(path, method='DFS')
+        path.reverse()
+        visualize(path, method='DFS')
 
-    puzzle = Puzzle(path, "DFS")
-    puzzle.initialization()
+        puzzle = Puzzle(path, "DFS")
+        puzzle.initialization()
+    else:
+        print("DFS Didn't find a solution")
 
     # A* manhattan
     A_start_1_time = time.time()
-    result, state, A_star_1_max_depth = a_star_search(init_state, goal_test, successor, manhatten_distance)
+    result, state, A_star_1_max_depth, A_star_1_explored_states = a_star_search(init_state, goal_test, successor, manhatten_distance)
     A_start_1_time = time.time() - A_start_1_time
-    print(result)
-    path = list()
-    path.append(state.state)
-    while state.parent is not None:
-        state = state.parent
+    if result:
+        path = list()
         path.append(state.state)
+        while state.parent is not None:
+            state = state.parent
+            path.append(state.state)
 
-    path.reverse()
+        path.reverse()
 
-    visualize(path, method='A* using Manhattan')
-    puzzle = Puzzle(path, "A* using Manhattan")
-    puzzle.initialization()
+        visualize(path, method='A* using Manhattan')
+        puzzle = Puzzle(path, "A* using Manhattan")
+        puzzle.initialization()
+    else:
+        print("A* (using Manhatten distance) Didn't find a solution")
 
     # A* euclidean
     A_start_2_time = time.time()
-    result, state, A_star_2_max_depth = a_star_search(init_state, goal_test, successor, euclidean_distance)
+    result, state, A_star_2_max_depth, A_star_2_explored_states = a_star_search(init_state, goal_test, successor, euclidean_distance)
     A_start_2_time = time.time() - A_start_2_time
-    print(result)
-    path = list()
-    path.append(state.state)
-    while state.parent is not None:
-        state = state.parent
+    if result:
+        path = list()
         path.append(state.state)
+        while state.parent is not None:
+            state = state.parent
+            path.append(state.state)
 
-    path.reverse()
-    visualize(path, method='A* using euclidean')
-    puzzle = Puzzle(path, "A* using euclidean")
-    puzzle.initialization()
+        path.reverse()
+        visualize(path, method='A* using euclidean')
+        puzzle = Puzzle(path, "A* using euclidean")
+        puzzle.initialization()
+    else:
+        print("A* (using euclidean distance) Didn't find a solution")
 
-    print("BFS time: ", BFS_time, " BFS max depth: ", BFS_max_depth)
-    print("DFS time: ", DFS_time, " DFS max depth: ", DFS_max_depth)
-    print("A*(manhattan distance) time: ", A_start_1_time, " A*(manhattan distance) max depth: ", A_star_1_max_depth)
-    print("A*(euclidean distance) time: ", A_start_2_time, " A*(manhattan distance) max depth: ", A_star_2_max_depth)
+    print("BFS time: ", BFS_time, " BFS max depth: ", BFS_max_depth,
+          ", BFS number of explored states: ", BFS_explored_states)
+    print("DFS time: ", DFS_time, " DFS max depth: ", DFS_max_depth,
+          ", DFS number of explored states: ", DFS_explored_states)
+    print("A*(manhattan distance) time: ", A_start_1_time,
+          " A*(manhattan distance) max depth: ", A_star_1_max_depth
+          , ", A*(manhattan distance) number of explored states: ", A_star_1_explored_states)
+    print("A*(euclidean distance) time: ", A_start_2_time,
+          " A*(manhattan distance) max depth: ", A_star_2_max_depth
+          , ", A*(euclidean distance) number of explored states: ", A_star_2_explored_states)
 
