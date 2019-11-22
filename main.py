@@ -53,7 +53,14 @@ def manhatten_distance(x1, y1, x2, y2):
 if __name__ == "__main__":
 
     initial_state = [1, 2, 5, 3, 4, 0, 6, 7, 8]
+
+
+
     init_state = State(initial_state)
+    BFS_Cost = 0
+    DFS_Cost = 0
+    A_star_1_Cost = 0
+    A_star_2_Cost = 0
 
     # BFS
     BFS_time = time.time()
@@ -71,6 +78,7 @@ if __name__ == "__main__":
 
         puzzle = Puzzle(path, "BFS")
         puzzle.initialization()
+        BFS_Cost = len(path) - 1
     else:
         print("BFS Didn't find a solution")
     # DFS
@@ -83,12 +91,12 @@ if __name__ == "__main__":
         while state.parent is not None:
             state = state.parent
             path.append(state.state)
-
         path.reverse()
         visualize(path, method='DFS')
 
         puzzle = Puzzle(path, "DFS")
         puzzle.initialization()
+        DFS_Cost = len(path) - 1
     else:
         print("DFS Didn't find a solution")
 
@@ -108,6 +116,7 @@ if __name__ == "__main__":
         visualize(path, method='A* using Manhattan')
         puzzle = Puzzle(path, "A* using Manhattan")
         puzzle.initialization()
+        A_star_1_Cost = len(path) - 1
     else:
         print("A* (using Manhatten distance) Didn't find a solution")
 
@@ -126,17 +135,22 @@ if __name__ == "__main__":
         visualize(path, method='A* using euclidean')
         puzzle = Puzzle(path, "A* using euclidean")
         puzzle.initialization()
+        A_star_2_Cost = len(path) - 1
     else:
         print("A* (using euclidean distance) Didn't find a solution")
 
     print("BFS time: ", BFS_time, " BFS max depth: ", BFS_max_depth,
-          ", BFS number of explored states: ", BFS_explored_states)
+          ", BFS number of explored states: ", BFS_explored_states
+          , " BFS Cost: ", BFS_Cost)
     print("DFS time: ", DFS_time, " DFS max depth: ", DFS_max_depth,
-          ", DFS number of explored states: ", DFS_explored_states)
+          ", DFS number of explored states: ", DFS_explored_states
+          , " DFS Cost: ", DFS_Cost)
     print("A*(manhattan distance) time: ", A_start_1_time,
           " A*(manhattan distance) max depth: ", A_star_1_max_depth
-          , ", A*(manhattan distance) number of explored states: ", A_star_1_explored_states)
+          , "\n\t, A*(manhattan distance) number of explored states: ", A_star_1_explored_states
+          , " A*(manhattan distance) cost: ", A_star_1_Cost)
     print("A*(euclidean distance) time: ", A_start_2_time,
           " A*(manhattan distance) max depth: ", A_star_2_max_depth
-          , ", A*(euclidean distance) number of explored states: ", A_star_2_explored_states)
+          , "\n\t, A*(euclidean distance) number of explored states: ", A_star_2_explored_states
+          , " A*(euclidean distance) cost: ", A_star_2_Cost)
 
